@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="blog-main">
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{blogData.title}}</h2>
+      <p class="blog-post-meta">{{blogData.date}} by <a>{{blogData.author}}</a></p>
+      <p>{{blogData.description}}</p>
+      <div id="md" class="transparent">
+        　<textarea style="display: block" placeholder="markdown"></textarea>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="blogData.status === true">
+    <hr style="filter: alpha(opacity=100,finishopacity=0,style=3)" width="90%" color="#6f5499" size="3" />
+    <div *ngIf="commentData.length !== 0">
+      <div class="card transparent" style="width: 100%; float: none; display: block; margin-left: auto; margin-right: auto;">
+        <div class="card-header">
+          评论区
+        </div>
+        <ul *ngFor="let comment of commentData" class="list-group list-group-flush">
+          <li *ngIf="username === comment.from && comment.status === true" class="list-group-item transparent">
+            {{comment.from}}:{{comment.comment}}
+            <button class="btn btn-outline-dark float-right transparent" (click)="change(comment)">edit</button>
+            <input *ngIf="commentInput === 1" type="text" class="form-control transparent" [formControl]="commentEdit" (keydown.enter)="editComment(comment)">
+          </li>
+          <li *ngIf="username === comment.from && comment.status === false" class="list-group-item transparent">
+            {{comment.from}}:该评论已被管理员隐藏
+            <button class="btn btn-outline-dark float-right transparent" (click)="change(comment)">edit</button>
+            <input *ngIf="commentInput === 1" type="text" class="form-control transparent" [formControl]="commentEdit" (keydown.enter)="editComment(comment)">
+          </li>
+          <li *ngIf="username !== comment.from && comment.status === true" class="list-group-item transparent">{{comment.from}}:{{comment.comment}} </li>
+          <li *ngIf="username !== comment.from && comment.status === false" class="list-group-item transparent">{{comment.from}}:该评论已被管理员隐藏 </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="commentData.length === 0">
+      <p>本文章暂时没有评论</p>
+    </div>
+  </div>
+  <div *ngIf="blogData.status === true">
+    <form role="form" style="margin-top: 8px">
+      <div class="form-group">
+        <label>写评论</label>
+        <input type="text" class="form-control transparent" placeholder="写下您的评论...." [formControl]="comment" (keyup.enter)="onSubmit()">
+      </div>
+    </form>
+  </div>
+</div>
+
+

@@ -1,0 +1,19 @@
+<div class="container">
+  <form>
+    <div class="row">
+      <div class="col-3">
+        <input class="form-control mr-sm-2 bg-transparent" type="text" placeholder="Title" aria-label="Title" size="30" maxlength="30" [formControl]="title">
+      </div>
+      <div class="col-9">
+        <input class="form-control mr-sm-2 bg-transparent" type="text" placeholder="Description" aria-label="Description" size="90" maxlength="90" [formControl]="description">
+      </div>
+    </div>
+    <div class="row"></div>
+  </form>
+  <div id="md" style="margin-top: 9px" appEditorMd [editormdConfig]="conf" (onEditorChange)="syncModel($event)">
+    <textarea style="display: block;" [(ngModel)]="markdown"></textarea>
+  </div>
+
+  <button class="btn btn btn-outline-dark float-right" (click)="onSubmit()">Submit</button>
+</div>
+

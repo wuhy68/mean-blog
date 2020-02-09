@@ -1,0 +1,18 @@
+video{
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: auto;
+  z-index: -9999;
+}
+
+.transparent{
+  background-color:rgba(255, 255, 255, 0)
+}
+
+.transparent_half{
+  background-color:rgba(255, 255, 255, 0.16)
+}

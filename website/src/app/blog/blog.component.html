@@ -1,0 +1,47 @@
+<div *ngIf="flag">
+<div class="container">
+  <div class="jumbotron p-4 p-md-5 text-dark rounded transparent_half">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 font-italic">{{firstCover.title}}</h1>
+      <p class="lead my-3">{{firstCover.description}}</p>
+      <p class="lead mb-0"><a href="/article/{{firstCover.title}}" class="text-dark font-weight-bold">Continue reading...</a></p>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div *ngFor="let article of blogData1" class="col-md-6 transparent">
+      <div [routerLink]="['/article', article.title]" class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">{{article.title}}</h3>
+          <div class="mb-1 text-muted">{{article.date}}</div>
+          <p class="card-text mb-auto">{{article.description}}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let article of blogData2" class="col-md-6 transparent">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div [routerLink]="['/article', article.title]" class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">{{article.title}}</h3>
+          <div class="mb-1 text-muted">{{article.date}}</div>
+          <p class="mb-auto">{{article.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li *ngIf="currentPage === 1" class="page-item disabled"><a class="page-link">Previous</a></li>
+      <li *ngIf="currentPage > 1" class="page-item"><a class="page-link" href="blog/{{currentPage - 1}}">Previous</a></li>
+      <li *ngFor="let page of pageArray" class="page-item"><a class="page-link" href="blog/{{page}}">{{page}}</a></li>
+      <li *ngIf="currentPage === pageNumber" class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+      <li *ngIf="currentPage < pageNumber" class="page-item"><a class="page-link" href="blog/{{currentPage + 1}}">Next</a></li>
+    </ul>
+  </nav>
+</div>
+</div>
+<div *ngIf="!flag">
+  You don't have blogs, Let's go writing!
+</div>
+
+
+
+

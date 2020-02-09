@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light transparent">
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div *ngIf="storage.get('root') !== 'agenda'" class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="about/{{storage.get('username').value}}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="blog/1">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="editor/{{storage.get('username').value}}">Editor</a>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2 transparent" type="text" placeholder="Search" aria-label="Search" size="30" maxlength="30" [formControl]="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" (click)="onSubmit()">Search</button>
+          <button class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 8px" (click)="signUp()">Sign up</button>
+        </form>
+    </div>
+    <div *ngIf="storage.get('root') === 'agenda'" class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="agenda">WorkSpace</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="blog/1">Blog</a>
+        </li>
+      </ul>
+      <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2 transparent" type="text" placeholder="Search" aria-label="Search" size="30" maxlength="30" [formControl]="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="onSubmit()">Search</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 8px" [routerLink]="'/login'">Sign up</button>
+      </form>
+    </div>
+</nav>
+

@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3" >
+      <button class="btn btn-block btn-outline-secondary" style="margin-top: 10px" [class.active]="blogPage" (click)="commentToBlog()" >Blog</button>
+      <button class="btn btn-block btn-outline-secondary" [class.active]="commentPage" (click)="blogToComment()">Comment</button>
+    </div>
+    <div class="clo-9 p-2">
+      <div *ngIf="blogPage">
+        <div *ngIf="blogData.length === 0">
+          No Blogs
+        </div>
+        <div *ngIf="blogData.length !== 0">
+          <div *ngFor="let blog of blogData" class="card transparent" style="width: 50rem;">
+            <div class="card-body">
+              <h5 class="card-title"> {{blog.title}} <a style="font-size: 10px">written by {{blog.author}}</a></h5>
+              <p *ngIf="blog.status === true" class="card-text"> {{blog.description}}</p>
+              <p *ngIf="blog.status === false" class="card-text">该博客已被管理员隐藏</p>
+              <div class="row">
+                <div class="col-4">
+                  <button class="btn btn-outline-secondary btn-block" [routerLink]="'/article/' + blog.title">view article</button>
+                </div>
+                <div class="col-4">
+                  <button class="btn btn-outline-secondary btn-block" type="submit" (click)="viewComment(blog)">view comment</button>
+                </div>
+                <div *ngIf="blog.status === true" class="col-4">
+                  <button class="btn btn-outline-secondary btn-block" (click)="hideBlog(blog)">conceal</button>
+                </div>
+                <div *ngIf="blog.status === false" class="col-4">
+                  <button class="btn btn-outline-secondary btn-block" (click)="recoverBlog(blog)">recover</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav aria-label="Page navigation example" style="margin-top: 10px">
+            <ul class="pagination justify-content-center">
+              <li *ngIf="currentBlogPage === 1" class="page-item disabled"><a class="page-link">Previous</a></li>
+              <li *ngIf="currentBlogPage > 1" class="page-item"><a class="page-link" (click)="changeBlogPage(currentBlogPage - 1)">Previous</a></li>
+              <li *ngFor="let page of blogPageArray" class="page-item"><a class="page-link" (click)="changeBlogPage(page)">{{page}}</a></li>
+              <li *ngIf="currentBlogPage === blogPageNumber" class="page-item disabled"><a class="page-link">Next</a></li>
+              <li *ngIf="currentBlogPage < blogPageNumber" class="page-item"><a class="page-link" (click)="changeBlogPage(currentBlogPage + 1)">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div *ngIf="commentPage">
+        <div *ngIf="commentData.length === 0">
+          No Comments
+        </div>
+        <div *ngIf="commentData.length !== 0">
+          <div *ngFor="let comment of commentData" class="card transparent" style="width: 50rem;">
+            <div class="card-body">
+              <h5 class="card-title"> {{comment.from}} <a style="font-size: 10px">comment on {{comment.blog}}</a></h5>
+              <div class="row">
+                <div *ngIf="comment.status === true" class="col-8">
+                  <p class="card-text"> {{comment.comment}}</p>
+                </div>
+                <div *ngIf="comment.status === false" class="col-8">
+                  <p class="card-text">该评论已被管理员隐藏</p>
+                </div>
+                <div *ngIf="comment.status === true" class="col-4">
+                  <button class="btn btn-outline-secondary btn-block" type="submit" (click)="hideComment(comment)">conceal</button>
+                </div>
+                <div *ngIf="comment.status === false" class="col-4">
+                  <button class="btn btn-outline-secondary btn-block" type="submit" (click)="recoverComment(comment)">recover</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav aria-label="Page navigation example" style="margin-top: 10px">
+            <ul class="pagination justify-content-center">
+              <li *ngIf="currentCommentPage === 1" class="page-item disabled"><a class="page-link">Previous</a></li>
+              <li *ngIf="currentCommentPage > 1" class="page-item"><a class="page-link" (click)="changeCommentPage(currentCommentPage - 1)">Previous</a></li>
+              <li *ngFor="let page of commentPageArray" class="page-item"><a class="page-link" (click)="changeCommentPage(page)">{{page}}</a></li>
+              <li *ngIf="currentCommentPage === commentPageNumber" class="page-item disabled"><a class="page-link">Next</a></li>
+              <li *ngIf="currentCommentPage < commentPageNumber" class="page-item"><a class="page-link" (click)="changeCommentPage(currentCommentPage + 1)">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

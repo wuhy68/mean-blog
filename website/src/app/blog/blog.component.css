@@ -1,0 +1,13 @@
+.pagination {
+  background-color: transparent;
+}
+.page-link {
+  color: #8FFF87;
+  background-color: transparent;
+}
+.page-item {
+  background-color: transparent;
+}
+.page-item.disabled .page-link{
+  background-color: transparent;
+}

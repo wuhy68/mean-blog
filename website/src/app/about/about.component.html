@@ -1,0 +1,25 @@
+<div *ngIf="blogData.length === 0">
+  <p>You don't have blogs. Let's go writing</p>
+</div>
+<div *ngIf="blogData.length !== 0">
+  <div *ngFor="let blog of blogData" class="card bg-transparent" style="width: 100%;">
+    <div class="card-body">
+      <h5 class="card-title">{{blog.title}}</h5>
+      <hr>
+      <p *ngIf="blog.status === true" class="card-text">{{blog.description}}</p>
+      <p *ngIf="blog.status === false" class="card-text">该博客已被管理员屏蔽</p>
+      <div class="row">
+        <div class="col-2">
+          <button class="btn btn-outline-secondary btn-block" [routerLink]="'/article/' + blog.title">view article</button>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-outline-secondary btn-block" type="submit" (click)="Edit(blog)">edit article</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
