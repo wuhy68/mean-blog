@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  signUp() {
+  signOut() {
     this.storage.remove('root');
     this.storage.remove('username');
     this.router.navigate(['']).then(err => console.log(err));
